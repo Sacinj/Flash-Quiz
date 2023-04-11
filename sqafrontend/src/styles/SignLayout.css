@@ -1,0 +1,207 @@
+.sign-layout{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    background-color: #251B37;
+    box-sizing: border-box;
+    overflow: clip;
+}
+.sign_bg {
+    max-height: 100vh;
+    max-width: 60%;
+}
+.sign_content{
+    min-width: 40%;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    margin: 0 auto;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.SigninPage {
+    width: 400px;
+    height:500px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-left: 20px;
+}
+.SignupPage {
+    width: 400px;
+    height:500px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-left: 20px;
+}
+.sign_content label{
+    display: block;
+    color: #FFFFFF;
+    font-size: 1.5rem;
+} 
+.btn_container{
+    padding: 30px;
+    padding-left: 0;
+}
+.sign_btn{
+    margin: 0;
+    border: 0;
+    background-color: #FFCACA;
+    border-radius: 50px;
+    padding: 10px 22px;
+    width: 99.72px;
+    height: 41.33px;
+    font-size: 1rem;
+    text-decoration: none;
+}
+a.sign_btn{
+    margin: 40px;
+    color: black;
+}
+
+img{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    max-height: 100vh;
+    width: 100%; 
+    object-fit: cover;
+    object-position: left bottom;
+}
+.SigninPage h1, .SignupPage h1 {
+    font-size: 4.5rem;
+    color: #FFCACA;
+}
+.SigninPage p{
+    color: #FFFFFF;
+    font-size: 1.35rem;
+}
+input {
+    display: block;
+    margin: 10px 0;
+    width: 60%;
+    height: 1.75rem;
+    box-sizing: border-box;
+    border-radius: 8px;
+    background-color: #FFECEF;
+    border: 0;
+    padding: 0.3rem;
+}
+ 
+
+ /* 2nd version using grid on the overall layout and no percentages */
+
+ /* .sign-layout{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+    background-color: #251B37;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    min-width: 425px;
+    height: 100vh;
+}
+.sign_bg {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    width: 100%;
+    height: 100vh;
+    grid-column: 1;
+    
+}
+.sign_content{
+    margin: auto;
+    padding: 0;
+    border: 0;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    grid-column: 2;
+    height: 100vh;
+    
+}
+.SigninPage {
+    margin: auto;
+    box-sizing: border-box;
+    border: 2px solid yellow;
+    padding: 3rem;
+    min-width: 425px;
+    background-color: #251B37;
+    overflow: hidden;
+}
+.SigninPage > * {
+    padding: 0.5rem;
+}
+.SignupPage {
+    background-color: #251B37;
+}
+.sign_content label{
+    color: #FFFFFF;
+    font-size: 2.5rem;
+    display: block;
+} 
+.btn_container{
+    
+}
+.sign_btn{
+    margin: 0;
+    border: 0;
+    background-color: #FFCACA;
+    border-radius: 50px;
+    padding: 10px 22px;
+    width: 99.72px;
+    height: 41.33px;
+    font-size: 1rem;
+    text-decoration: none;
+}
+a.sign_btn{
+    
+}
+
+img{
+    display: block;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: bottom left;
+}
+.SigninPage h1, .SignupPage h1 {
+    font-size: 6rem;
+    color: #FFCACA;
+}
+.SigninPage p{
+    color: #FFFFFF;
+    font-size: 2.35rem;
+}
+input {
+    display: block;
+    width: 60%;
+    height: 2rem;
+    background-color: #FFECEF;
+    border-radius: 8px;
+    margin: 0.5rem 0;
+}
+span {
+    white-space: nowrap;
+}
+form > *{
+    box-sizing: border-box;
+    padding: 0.5rem
+}
+
+@media (max-width: 600px) {
+    img, .sign_bg {
+        position: absolute;
+        left: -5000px;
+    }
+    .sign-layout{
+        grid-template-columns: 0fr 1fr;
+    }
+    .SigninPage, .SignupPage {
+        height: 100%;
+        overflow: scroll;
+    }
+    
+} */

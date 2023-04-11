@@ -1,0 +1,53 @@
+{
+    "accounts": [
+      {
+        "id": "anna@gmail.com",
+        "email": "anna@gmail.com",
+        "pass": "anna1",
+        "name": "Anna",
+        "sets": [
+            {
+                "id": "science",
+                "qa": [
+                    {
+                        "id": 1,
+                        "question": "What is the powerhouse of the cell?",
+                        "answer": "mitochondria"
+                    },
+                    {
+                        "id": 2,
+                        "question": "What is capital of Philippines?",
+                        "answer": "Manila"
+                    }
+                ]
+            },
+            {
+                "id": "history",
+                "qa": [
+                    {
+                        "id": 1,
+                        "question": "What is the date of Philippine independence?",
+                        "answer": "July 12, 1998"
+                    },
+                    {
+                        "id": 2,
+                        "question": "Who is the first president?",
+                        "answer": "Emilio Aguinaldo"
+                    }
+                ]
+            }
+
+        ]
+      },
+      {
+        "id": "barbie@gmail.com",
+        "email": "barbie@gmail.com",
+        "pass": "barbie1"
+      },
+      {
+        "id": "cara@gmail.com",
+        "email": "cara@gmail.com",
+        "pass": "cara1"
+      }
+    ]
+  }
