@@ -1,22 +1,13 @@
 import { useEffect, useState } from "react";
 
 const Quiz = (set) => {
-    const [accounts, setAccounts] = useState(null);
-    useEffect(()=>{
-        console.log('useEffect is running in quiz component');
-        fetch('http://localhost:8000/accounts').then(res=>{
-            return res.json();
-        }).then((data)=>{
-            setAccounts(data);
-            console.log(data);
-        })
-        
-    }, [])
+    //const [accounts, setAccounts] = useState(null);
+    
 
     return(
         <section>
             <p>this is the quiz page qui qui quiz</p>
-            <p>{set.title}</p>
+            {/* <p>{set.title}</p>
             {
                 accounts && accounts.map((account)=>{
                     return(
@@ -26,7 +17,7 @@ const Quiz = (set) => {
                         </div>
                     );
                 })
-            }
+            } */}
         </section>
     );
 };

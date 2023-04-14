@@ -1,0 +1,149 @@
+----------------from Sign up Page-------------------------------
+// database of accounts
+const accounts = [
+    {
+        id: 1,
+        name: 'Anna',
+        email: 'anna@gmail.com',
+        pass: 'anna1'
+    },
+    {
+        id: 2,
+        name: 'Barbie',
+        email: 'barbie@gmail.com',
+        pass: 'barbie1'
+    },
+    {
+        id: 3,
+        name: 'Cara',
+        email: 'cara@gmail.com',
+        pass: 'cara1'
+    }
+  ]
+
+const Signup = () => {
+    const [email, setEmail] = useState('');
+    const [pass, setPass] = useState('');
+    const [cfmpass, setCfmPass] = useState('');
+    const [accs, setAccs] = useState(accounts);
+    const [showModal, setShowModal] = useState(false);
+    const [modalCont, setModalCont] = useState('');
+    const navigate = useNavigate();
+    const [passPlaceholder, setPassPlaceholder] = useState('********');
+
+    const signup = (e) => {
+        e.preventDefault();
+        if(email && pass && cfmpass){
+            const passArray = accs.map((acc)=>{
+                if(acc.email===email){
+                    setEmail('');
+                    console.log('account exists based on email');
+                    setShowModal(true);
+                    setModalCont('Email already exists!');
+                    return(acc.pass);
+
+                } else {
+                    if(pass===cfmpass){
+                        console.log('pass and cmf pass matches')
+                        /* accs.push(
+                            {
+                                id: new Date().getTime().toString(),
+                                name: 'new account',
+                                email,
+                                pass
+                            }
+                        ); */
+                        setAccs([...accs, {
+                            id: new Date().getTime().toString(),
+                            name: 'new account',
+                            email,
+                            pass
+                        }]);
+                        console.log(accs);
+                        navigate("/sign");
+                        return(acc.pass);
+                    } else {
+                        console.log('confirm pass does not match');
+                        setCfmPass('');
+                        setPassPlaceholder('Please Confirm Again');
+                        return(acc.pass);
+                    }
+                }
+            })
+        } else {
+            setEmail('');
+            setPass('');
+            setCfmPass('');
+        }
+    };
+    ---------------------------------------------------
+    -----------firebase configuration sdk??------------
+    // Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyDmzpbQsZ5Ac9ktMQGhFMx7EqhDEfvvFrU",
+  authDomain: "flash-quiz-a0610.firebaseapp.com",
+  projectId: "flash-quiz-a0610",
+  storageBucket: "flash-quiz-a0610.appspot.com",
+  messagingSenderId: "958820173228",
+  appId: "1:958820173228:web:dd920302d78fa2b3116609",
+  measurementId: "G-0LLMHCJZZ4"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+--------------------------------------------------------------
+----------from Sign in ---------------------
+useEffect(()=>{
+        fetch('http://localhost:8000/accounts').then((res)=>{
+                return res.json();
+            }).then((data)=>{
+                setAccounts(data);
+            });
+    },[]);
+
+    const signin = (e) => {
+        e.preventDefault();
+        if(email && pass){
+            accounts && accounts.map((acc)=>{
+                if(acc.email===email){
+                    if(acc.pass===pass){
+                        navigate("/homelayout/quiz");
+                        return false; // THis is maybe for modal and just so that map returns smthng
+                    } else{
+                        setEmail('');
+                        setPass('');
+                        return true;
+                    }
+                } else{
+                    setEmail('');
+                    setPass('');
+                    return true;
+                }
+            })
+   
+        } else {
+            setEmail('');
+            setPass('');
+        }
+    };
+    --------------------------------------------------
+    -------------from Quiz Component--------------
+    useEffect(()=>{
+        console.log('useEffect is running in quiz component');
+        fetch('http://localhost:8000/accounts').then(res=>{
+            return res.json();
+        }).then((data)=>{
+            setAccounts(data);
+            console.log(data);
+        })
+        
+    }, [])
+    --------------------------------------

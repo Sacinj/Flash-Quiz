@@ -1,44 +1,23 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { auth } from "../config/firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const Signin=()=>{
     const [pass, setPass] = useState('');
     const [email, setEmail] = useState('');
     const navigate = useNavigate();
-    const [accounts, setAccounts] = useState(null);
-
-    useEffect(()=>{
-        fetch('http://localhost:8000/accounts').then((res)=>{
-                return res.json();
-            }).then((data)=>{
-                setAccounts(data);
-            });
-    },[]);
+    //const [accounts, setAccounts] = useState(null);
 
     const signin = (e) => {
         e.preventDefault();
-        if(email && pass){
-            accounts && accounts.map((acc)=>{
-                if(acc.email===email){
-                    if(acc.pass===pass){
-                        navigate("/homelayout/quiz");
-                        return false; // THis is maybe for modal and just so that map returns smthng
-                    } else{
-                        setEmail('');
-                        setPass('');
-                        return true;
-                    }
-                } else{
-                    setEmail('');
-                    setPass('');
-                    return true;
-                }
-            })
-   
-        } else {
-            setEmail('');
-            setPass('');
-        }
+        signInWithEmailAndPassword(auth, email, pass)
+            .then((userCredentials) => {
+                console.log(userCredentials);
+                navigate("/homelayout/quiz");
+            }) .catch((err) => {
+                console.log(err);
+            });
     };
 
     return(
