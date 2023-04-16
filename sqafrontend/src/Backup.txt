@@ -147,3 +147,17 @@ useEffect(()=>{
         
     }, [])
     --------------------------------------
+    -----------from HomeLayout------------------------
+    <section className="cardSet_bar">
+                {
+                            sets.map((set)=>{
+                                return(
+                                    <article className="set_box">
+                                        <NavLink className="set_title" onClick={(set)=>{setCardSet(set)}} to="quiz">{set.title}</NavLink>
+                                    </article>
+                                );
+                            })
+                        }
+            </section>
+            ----------------------------------
+            

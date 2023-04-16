@@ -3,6 +3,7 @@ import { NavLink, Outlet, Link, useNavigate } from "react-router-dom";
 import '../styles/HomeLayout.css';
 import { auth } from "../config/firebase";
 import { signOut } from "firebase/auth";
+import CardsetBar from "../Components/CardsetBar";
 
 //database
 const sets = [
@@ -79,9 +80,10 @@ const HomeLayout = () => {
             
             <nav class="nav_bar">
                     <h1>Flash Quiz App</h1>
-                    <button type="button" className="logout_btn" onClick={logout} >Log Out</button>
+                    
                     <article className="acct_nav">
                         {/* <Link to="/sign" className="logout_btn">Logout</Link> */}
+                        <button type="button" className="logout_btn" onClick={logout} >Log Out</button>
                         <div>
                             {auth?.currentUser?.email}
                         </div>
@@ -90,17 +92,9 @@ const HomeLayout = () => {
                         </div>
                     </article>
             </nav>
-            <section className="cardSet_bar">
-                {
-                            sets.map((set)=>{
-                                return(
-                                    <article className="set_box">
-                                        <NavLink className="set_title" onClick={(set)=>{setCardSet(set)}} to="quiz">{set.title}</NavLink>
-                                    </article>
-                                );
-                            })
-                        }
-            </section>
+            <CardsetBar>
+
+            </CardsetBar>
             
             <div className="home_content">
                 <Outlet set={cardSet} />
