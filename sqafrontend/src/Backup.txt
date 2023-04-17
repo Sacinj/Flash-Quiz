@@ -160,4 +160,94 @@ useEffect(()=>{
                         }
             </section>
             ----------------------------------
-            
+------------------from HomeLayout ------------------
+//database
+const sets = [
+    {
+        id: 'science',
+        title: 'Science',
+        qa: [
+            {
+                id: 1,
+                question: 'What is the powerhouse of the cell?',
+                answer: 'Mitochondria'
+            },
+            {
+                id: 2,
+                question: 'What is the heaviest organ in the body?',
+                answer: 'Liver'
+            }
+        ]
+    },
+    {
+        id: 'logic circuits',
+        title: 'Logic Circuits',
+        qa: [
+            {
+                id: 1,
+                question: 'What is 32?',
+                answer: 'OR'
+            },
+            {
+                id: 2,
+                question: 'What is 8?',
+                answer: 'AND'
+            }
+        ]
+    },
+    {
+        id: 'movies',
+        title: 'Movies',
+        qa: [
+            {
+                id: 1,
+                question: 'Feed me if you dare',
+                answer: 'Shrek'
+            },
+            {
+                id: 2,
+                question: 'I am speed',
+                answer: 'Cars 1'
+            }
+        ]
+    }
+];
+--------------------------------------------------
+
+----------------from CardsetBar before displaying collections instead of answers----
+const CardsetBar = () => {
+    const [scienceList, setScienceList] = useState([]);
+    const scienceCollectionRef = collection(db, "Science");
+
+    const getQAList = async () => {
+        try {
+            const data = await getDocs(scienceCollectionRef);
+            console.log(data);
+            const filteredData = data.docs.map((doc)=>({
+                ...doc.data(),
+                id: doc.id,
+            }));
+            setScienceList(filteredData);
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
+    useEffect(() => {
+        getQAList();
+    }, []);
+
+    return(
+        <section className="cardSet_bar">
+            {/* need daw ID */}
+                {scienceList.map((qa)=>(
+                    <article className="set_box" key={qa.id}>
+                        {qa.answer}
+                    </article>
+                ))}
+        </section>
+    );
+};
+
+export default CardsetBar;
+------------------------------------------------------------------------------------
