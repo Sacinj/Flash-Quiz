@@ -6,12 +6,7 @@ import { signOut } from "firebase/auth";
 import CardsetBar from "../Components/CardsetBar";
 
 const HomeLayout = () => {
-    //const [cardSet, setCardSet] = useState(); // object from sets is this set or category
     const navigate = useNavigate();
-
-    /* const setBar_handle = (set) => {
-        setCardSet(set);
-    }; */
 
     const logout = async () => {
         try{
@@ -30,7 +25,6 @@ const HomeLayout = () => {
                     <h1>Flash Quiz App</h1>
                     <NavLink to="/homelayout/fcset">Add QA</NavLink>
                     <article className="acct_nav">
-                        {/* <Link to="/sign" className="logout_btn">Logout</Link> */}
                         <button type="button" className="logout_btn" onClick={logout} >Log Out</button>
                         <div>
                             {auth?.currentUser?.email}
@@ -40,6 +34,7 @@ const HomeLayout = () => {
                         </div>
                     </article>
             </nav>
+            {/* <CardsetBar userEmail={auth?.currentUser?.email}> */}
             <CardsetBar>
             </CardsetBar>
             

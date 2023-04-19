@@ -251,3 +251,84 @@ const CardsetBar = () => {
 
 export default CardsetBar;
 ------------------------------------------------------------------------------------
+-----------------from CardsetBar------------------------------
+const [scienceList, setScienceList] = useState([]);
+    const scienceCollectionRef = collection(db, "Science");
+    const getQAList = async () => {
+        try {
+            const data = await getDocs(scienceCollectionRef);
+            console.log(data);
+            const filteredData = data.docs.map((doc)=>({
+                ...doc.data(),
+                id: doc.id,
+            }));
+            setScienceList(filteredData);
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
+    import { useCollectionData } from "react-firebase-hooks/firestore";
+    const query = collection(db, "USERS", userEmail, "CARDSETS");
+    const [cardSets, loading, error] = useCollectionData(cardSetCollectionRef);
+
+    const getSet = async () => {
+        try{
+            const querySnapshot = await getDocs(cardSetCollectionRef);
+            querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            console.log(doc.id, " => ", doc.data());
+            });
+            setCardSetList(querySnapshot);
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
+     /* const getCardSets = async () => {
+        try {
+            const data = await getDocs(cardSetCollectionRef);
+            console.log(data);
+            const filteredData = data.docs.map((doc)=>({
+                ...doc.data(),
+                id: doc.id,
+            }));
+            setCardSetList(filteredData);
+        } catch (err) {
+            console.error(err);
+        }
+    }; */
+
+    {/* {loading && "Loading..."}
+                {
+                    cardSets?.map((set)=>(
+                        <article className="set_box" key={Math.random()}>
+                            {set.name}
+                        </article>
+                    ))
+                } */}
+
+    {/* {scienceList.map((qa)=>(
+                    <article className="set_box" key={qa.id}>
+                        {qa.answer}
+                    </article>
+                ))} */}
+
+/* {
+    sets.map((set)=>{
+        return(
+            <article className="set_box">
+                <NavLink className="set_title" onClick={(set)=>{setCardSet(set)}} to="quiz">{set.title}</NavLink>
+            </article>
+        );
+    })
+} */
+-------------------------------------------------------------
+-----------Modal Warning from Signup----------------------------
+import ModalWarning from "./ModalWarn";
+    const [showModal, setShowModal] = useState(false);
+    const [modalCont, setModalCont] = useState('');
+    setModalCont("User already exists");
+    setShowModal(true);
+    {showModal && <ModalWarning modalContent={modalCont} />}
+------------------------------------------------------------------------

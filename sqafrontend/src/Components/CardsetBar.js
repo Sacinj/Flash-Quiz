@@ -1,50 +1,58 @@
 import { db } from "../config/firebase";
 import { getDocs, collection } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import { auth } from "../config/firebase";
 
+// const CardsetBar = ({userEmail}) => {
 const CardsetBar = () => {
-    const [scienceList, setScienceList] = useState([]);
-    const scienceCollectionRef = collection(db, "Science");
-    //const cardSetCollectionRef = collection(db, );
+    const userEmail = auth?.currentUser?.email;
+    
+    //const cardSetCollectionRef = collection(db, "USERS", userEmail, "CARDSETS");
+    const [cardSetList, setCardSetList] = useState([]);
 
-    const getQAList = async () => {
+    const getCardSets = async () => {
         try {
-            const data = await getDocs(scienceCollectionRef);
+            console.log("Inside getCardSets func in upper try block");
+            //const data = await getDocs(cardSetCollectionRef);
+            const data = await getDocs(collection(db, "USERS", userEmail, "CARDSETS"));
             console.log(data);
             const filteredData = data.docs.map((doc)=>({
-                ...doc.data(),
                 id: doc.id,
             }));
-            setScienceList(filteredData);
+            console.log("Inside getCardSets func in lower try block");
+            setCardSetList(filteredData);
+            console.log(filteredData);
         } catch (err) {
+            console.log("Inside getCardSets func in catch block");
             console.error(err);
         }
-    };
+    }; 
 
     useEffect(() => {
-        getQAList();
+        console.log("Current user(useEffect upper, CardsetBar): ", userEmail);
+        if(userEmail){
+            getCardSets();
+        }
+        
+        console.log("Current user(useEffect lower, CardsetBar): ", userEmail);
     }, []);
 
+
+    // i cant display only qa becuase its an object, only its fields or properties
     return(
         <section className="cardSet_bar">
-            {/* need daw ID */}
-                {scienceList.map((qa)=>(
-                    <article className="set_box" key={qa.id}>
-                        {qa.answer}
-                    </article>
-                ))}
+                
+                {
+                    cardSetList?.map((set) => (
+                        <article className="set_box" key={set.id}>
+                            {set.id}
+                        </article>
+                    ))
+                }
+                
         </section>
     );
 };
 
 export default CardsetBar;
 
-/* {
-    sets.map((set)=>{
-        return(
-            <article className="set_box">
-                <NavLink className="set_title" onClick={(set)=>{setCardSet(set)}} to="quiz">{set.title}</NavLink>
-            </article>
-        );
-    })
-} */

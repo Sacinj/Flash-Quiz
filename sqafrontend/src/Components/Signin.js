@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { auth } from "../config/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
@@ -7,13 +7,16 @@ const Signin=()=>{
     const [pass, setPass] = useState('');
     const [email, setEmail] = useState('');
     const navigate = useNavigate();
-    //const [accounts, setAccounts] = useState(null);
+    
+    useEffect(() => {
+        console.log("Current user logged in: ",auth?.currentUser?.email);
+    }, []);
 
     const signin = (e) => {
         e.preventDefault();
         signInWithEmailAndPassword(auth, email, pass)
             .then((userCredentials) => {
-                console.log(userCredentials);
+                console.log("User credentials: ",userCredentials);
                 navigate("/homelayout/quiz");
             }) .catch((err) => {
                 console.log(err);
