@@ -7,6 +7,7 @@ import Signup from './Components/Signup';
 import Quiz from './Components/Quiz';
 import FCSet from './Components/FCSet';
 import Welcome from './Components/Welcome';
+import Greeting from './Components/Greeting';
 
 //layouts
 import RootLayout from './layouts/RootLayout';
@@ -24,7 +25,8 @@ const router = createBrowserRouter(
         <Route path="signup" element={<Signup />}></Route>
       </Route>
       <Route path="homelayout" element={<HomeLayout />}>
-        <Route path="quiz" element={<Quiz/>}></Route>
+        <Route path="quiz" element={<Greeting/>}></Route>
+        <Route path="quiz/:children" element={<Quiz/>}></Route>
         <Route path="fcset" element={<FCSet/>}></Route>
       </Route>
       
