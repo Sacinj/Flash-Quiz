@@ -3,6 +3,11 @@ import { getDocs, collection } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { auth } from "../config/firebase";
 import { onAuthStateChanged } from "firebase/auth";
+import { NavLink } from "react-router-dom";
+
+export const cardSetTitle = '';
+
+
 
 // const CardsetBar = ({userEmail}) => {
 const CardsetBar = () => {
@@ -50,6 +55,12 @@ const CardsetBar = () => {
         //console.log("Current user(useEffect lower, CardsetBar): ", userEmail);
     }, [loggedInEmail]);
 
+    const getCardSetTitle = (title) => {
+        
+             cardSetTitle = title;
+            console.log("The title: ", cardSetTitle);
+        
+    };
 
     // i cant display only qa becuase its an object and it's the id of the row, only its fields or properties
     return(
@@ -58,7 +69,8 @@ const CardsetBar = () => {
                 {
                     cardSetList?.map((set) => (
                         <article className="set_box" key={set.id}>
-                            {set.id}
+                            {/* <NavLink to="/homelayout/quiz" onClick={()=>{getCardSetTitle(set.id)}}>{set.id}</NavLink> */}
+                            <NavLink to={`/homelayout/quiz/${set.id}`} onClick={()=>{getCardSetTitle(set.id)}}>{set.id}</NavLink>
                         </article>
                     ))
                 }

@@ -5,6 +5,7 @@ import { auth } from "../config/firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import CardsetBar from "../Components/CardsetBar";
 import { collection } from "firebase/firestore";
+import { cardSetTitle } from "../Components/CardsetBar";
 
 const HomeLayout = () => {
     //const [userName, setUserName] = useState("");
@@ -25,7 +26,10 @@ const HomeLayout = () => {
         }
         
     } */
+    
+
     useEffect(()=>{
+        
         onAuthStateChanged(auth, (userData)=>{
             //console.log(userData);
             if(userData){
