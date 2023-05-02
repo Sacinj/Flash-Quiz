@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { addDoc, collection, setDoc, doc } from "firebase/firestore";
 import { db } from "../config/firebase";
+import "../styles/FCSet.css";
 
 const FCSet = () => {
     const [newQuestion, setNewQuestion] = useState("");
@@ -42,7 +43,9 @@ const FCSet = () => {
     return(
         <section>
             <p>this is the flash card set page for adding questions and aswers</p>
-            <form >
+            <div className="add2set_container">
+            <form className="add2set_form">
+                <div>
                 <label>
                     Input Question:
                     <input   placeholder="Question..." onChange={(e) => {setNewQuestion(e.target.value)}}></input>
@@ -51,11 +54,24 @@ const FCSet = () => {
                     Input Answer:
                     <input   placeholder="Answer..." onChange={(e) => {setNewAnswer(e.target.value)}}></input>
                 </label>
+                </div>
+
+                <div className="select_submit">
+                <label>
+                    <select name="FCSet">
+                        <option value="" disabled selected hidden>Choose a Set</option>
+                    </select>
+                </label>
                 <button type="button" onClick={addQA}>ADD</button>
+                </div>
             </form>
+            </div>
 
             <p>Add a new collection or cardet</p>
-            <form >
+
+            <div className="new_set_container">
+            <form className="new_set_form">
+                <div>
                 <label>
                     Input Set Name:
                     <input placeholder="Set Name..."  onChange={(e) => {setNewSetName(e.target.value)}}></input>
@@ -68,8 +84,13 @@ const FCSet = () => {
                     Input Answer:
                     <input   placeholder="Answer..." onChange={(e) => {setNewAnswer(e.target.value)}}></input>
                 </label>
+                </div>
+
+                <div className="button">
                 <button type="button" onClick={addNewSet}>ADD New Set</button>
+                </div>
             </form>
+            </div>
         </section>
     );
 };

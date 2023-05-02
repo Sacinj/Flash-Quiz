@@ -332,3 +332,20 @@ import ModalWarning from "./ModalWarn";
     setShowModal(true);
     {showModal && <ModalWarning modalContent={modalCont} />}
 ------------------------------------------------------------------------
+-----------From Quiz.js; tried to use offline retrieval; doesn't work-------------
+// Get a document, forcing the SDK to fetch from the offline cache.
+    /* const getSet = async () =>{
+        try {
+            console.log("Before docRef");
+            //const docRef = doc(db, "USERS", userEmail, "CARDSETS", title);
+            console.log("USERS ",userEmail," CARDSETS ", title);
+            const doc = await getDocFromCache(doc(db, "USERS", userEmail, "CARDSETS", title));
+            setCardSet(doc);
+            // Document was found in the cache. If no cached document exists,
+             // an error will be returned to the 'catch' block below.
+            console.log("Cached document data:", doc.data());
+        } catch (e) {
+            console.log("Error getting cached document:", e);
+        }
+    } */
+----------------------------------------------------------------

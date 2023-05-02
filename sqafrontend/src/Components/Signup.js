@@ -59,7 +59,7 @@ const Signup = () => {
             <h1><span>Join the</span> Community</h1>
             <form onSubmit={signup}>
                 <label>Email {doesUserExist && <span style={{fontSize: '1rem', color: 'pink'}}>User already exists</span> }<input type="email" id="signup_email" name="signup_email" value={email} onChange={(e)=>{setEmail(e.target.value)}} placeholder="abc@defg.hij" required ></input></label>
-                <label>Password {isPassLengthShort && <span style={{fontSize: '1rem', color: 'pink'}}>Must be at least 6 charcters long</span> } <input type="password" id="signup_pass" name="signup_pass" value={pass} onChange={(e)=>{setPass(e.target.value)}} placeholder="********" required ></input></label>
+                <label>Password {isPassLengthShort && <span style={{fontSize: '1rem', color: 'pink'}}>Must be at least 6 charcters long</span> } <input type="password" id="signup_pass" name="signup_pass" value={pass} minLength="6" onChange={(e)=>{setPass(e.target.value)}} placeholder="********" required ></input></label>
                 <label>Confirm Password<input type="password" id="signup_cfmpass" name="signup_cfmpass" value={cfmpass} onChange={(e)=>{setCfmPass(e.target.value)}} placeholder={passPlaceholder} required ></input></label>
                 <label>Username <input type="text" id="signup_username" name="signup_username" value={username} onChange={(e)=>{setUsername(e.target.value)}} placeholder="username" required></input></label>
                 <button type="submit" className="sign_btn">Sign up</button>
