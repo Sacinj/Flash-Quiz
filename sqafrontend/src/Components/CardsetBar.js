@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import { auth } from "../config/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { NavLink } from "react-router-dom";
+import CardSetIcon from "./icons/cardSet";
 
 export const cardSetTitle = '';
-
 
 
 // const CardsetBar = ({userEmail}) => {
@@ -69,8 +69,9 @@ const CardsetBar = () => {
                 {
                     cardSetList?.map((set) => (
                         <article className="set_box" key={set.id}>
+                            <CardSetIcon />
                             {/* <NavLink to="/homelayout/quiz" onClick={()=>{getCardSetTitle(set.id)}}>{set.id}</NavLink> */}
-                            <NavLink to={`/homelayout/quiz/${set.id}`} onClick={()=>{getCardSetTitle(set.id)}}>{set.id}</NavLink>
+                            <NavLink className="navlink" to={`/homelayout/quiz/${set.id}`} onClick={()=>{getCardSetTitle(set.id)}}>{set.id}</NavLink>
                         </article>
                     ))
                 }

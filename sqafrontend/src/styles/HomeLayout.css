@@ -54,14 +54,24 @@
         justify-content: center;
     }
 .cardSet_bar {
-    background-image: linear-gradient(#FFD1D1, #F1A1B4);
-    padding: 2rem;
+    /* background-image: linear-gradient(#FFD1D1, #F1A1B4); */
+    background: #372948;
+    padding: 1rem;
     font-size: 1.5rem;
     grid-column: 1/2;
     grid-row: 2/3;
+    color: #261F2E;
+}
+.cardSet_bar .navlink {
+    margin-left: 5px;
+    text-decoration: none;
+    color: #FFCED0;
+    cursor: pointer;
 }
 .set_box{
-    border: 1px solid yellow;
+    /* border: 1px solid yellow; */
+    border: none;
+    margin: 0.5rem;
 }
 .set_title{
     text-decoration: none;

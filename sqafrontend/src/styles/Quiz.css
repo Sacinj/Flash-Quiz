@@ -1,0 +1,8 @@
+.quiz_component{
+    box-sizing: border-box;
+    color: azure;
+}
+button{
+    margin: 5px;
+    color: brown;
+}

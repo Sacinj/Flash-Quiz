@@ -349,3 +349,16 @@ import ModalWarning from "./ModalWarn";
         }
     } */
 ----------------------------------------------------------------
+----------From Quiz.js sample of operational condition----------
+{/* <p>{set.title}</p>
+            {
+                accounts && accounts.map((account)=>{
+                    return(
+                        <div key={account.id}>
+                            <p>{account.email}</p>
+                            <p>{account.pass}</p>
+                        </div>
+                    );
+                })
+            } */}
+------------------------------------------------------------------
