@@ -3,7 +3,7 @@ import { getDocs, collection } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { auth } from "../config/firebase";
 import { onAuthStateChanged } from "firebase/auth";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import CardSetIcon from "./icons/cardSet";
 
 export const cardSetTitle = '';
@@ -14,6 +14,7 @@ const CardsetBar = () => {
     const loggedInEmail = auth?.currentUser?.email; //Needs checking to see if this variable is the best solution to always have userEmail value even after refreshing the page
     const [userEmail, setUserEmail] = useState(loggedInEmail);
     const [cardSetList, setCardSetList] = useState([]);
+    const navigate = useNavigate();
 
 
     const getCardSets = async () => {
@@ -42,15 +43,15 @@ const CardsetBar = () => {
                 setUserEmail(userData.email);
                 //console.log("The userEmail: ",userEmail);
             } else{
-                console.log("Walay sulod ky wlay email");
+                console.log("CardsetBar: Walay sulod ky wlay email");
             }
         });
         //console.log("Current user(useEffect upper, CardsetBar): ", userEmail);
         if(userEmail){
             getCardSets();
-            console.log("Na get ang cardset");
+            console.log("CardsetBar: Na get ang cardset");
         }else{
-            console.log("Wala na get ang card set");
+            console.log("CardsetBar: Wala na get ang card set");
         }
         //console.log("Current user(useEffect lower, CardsetBar): ", userEmail);
     }, [loggedInEmail]);
@@ -58,8 +59,12 @@ const CardsetBar = () => {
     const getCardSetTitle = (title) => {
         
              cardSetTitle = title;
-            console.log("The title: ", cardSetTitle);
+            console.log("CardsetBar: The title: ", cardSetTitle);
         
+    };
+
+    const editSet = (setID) => {
+        navigate(`/homelayout/editFC/${setID}`);
     };
 
     // i cant display only qa becuase its an object and it's the id of the row, only its fields or properties
@@ -69,7 +74,8 @@ const CardsetBar = () => {
                 {
                     cardSetList?.map((set) => (
                         <article className="set_box" key={set.id}>
-                            <CardSetIcon />
+                            <button type="button" onClick={()=>{editSet(set.id)}}><CardSetIcon /></button>
+                            
                             {/* <NavLink to="/homelayout/quiz" onClick={()=>{getCardSetTitle(set.id)}}>{set.id}</NavLink> */}
                             <NavLink className="navlink" to={`/homelayout/quiz/${set.id}`} onClick={()=>{getCardSetTitle(set.id)}}>{set.id}</NavLink>
                         </article>

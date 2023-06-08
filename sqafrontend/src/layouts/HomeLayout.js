@@ -54,8 +54,10 @@ const HomeLayout = () => {
         <div className="home_layout">
             
             <nav className="nav_bar">
-                    <h1>Flash Quiz App</h1>
-                    <NavLink to="/homelayout/fcset">Add QA</NavLink>
+                    <h1>Flash Quiz</h1>
+                    <NavLink to="/homelayout/fcset">Create New Set</NavLink>
+                    <NavLink to="/homelayout/aboutus">About Us</NavLink>
+                    <NavLink to="/homelayout/quiz">Tutorial</NavLink>
                     <article className="acct_nav">
                         <button type="button" className="logout_btn" onClick={logout} >Log Out</button>
                         <div>

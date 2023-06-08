@@ -8,6 +8,8 @@ import Quiz from './Components/Quiz';
 import FCSet from './Components/FCSet';
 import Welcome from './Components/Welcome';
 import Greeting from './Components/Greeting';
+import AboutUs from './Components/AboutUs';
+import EditFCSet from './Components/EditFCSet';
 
 //layouts
 import RootLayout from './layouts/RootLayout';
@@ -28,6 +30,8 @@ const router = createBrowserRouter(
         <Route path="quiz" element={<Greeting/>}></Route>
         <Route path="quiz/:children" element={<Quiz/>}></Route>
         <Route path="fcset" element={<FCSet/>}></Route>
+        <Route path="aboutus" element={<AboutUs/>}></Route>
+        <Route path="editFC/:children" element={<EditFCSet/>}></Route>
       </Route>
       
     </Route>

@@ -362,3 +362,61 @@ import ModalWarning from "./ModalWarn";
                 })
             } */}
 ------------------------------------------------------------------
+
+--------------------From FCSet-------------------------------
+//const scienceCollectionRef = doc(collection(db, "Science"));
+
+const addQA = async () => {
+        try {
+            await setDoc(scienceCollectionRef,{
+                answer: newAnswer,
+                question: newQuestion,
+            });
+            console.log("added");
+            console.log(newQuestion);
+            console.log(newAnswer);
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
+
+     const addNewSet = async () => {
+        try {
+            await setDoc(doc(collection(db, newSetName)),{
+                a1: newAnswer,
+                q1: newQuestion,
+            });
+            console.log("added");
+            console.log(newQuestion);
+            console.log(newAnswer);
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
+
+<div className="add2set_container">
+            <form className="add2set_form">
+                <div>
+                <label>
+                    Input Question:
+                    <input   placeholder="Question..." onChange={(e) => {setNewQuestion(e.target.value)}}></input>
+                </label>
+                <label>
+                    Input Answer:
+                    <input   placeholder="Answer..." onChange={(e) => {setNewAnswer(e.target.value)}}></input>
+                </label>
+                </div>
+
+                <div className="select_submit">
+                <label>
+                    <select name="FCSet">
+                        <option value="" disabled selected hidden>Choose a Set</option>
+                    </select>
+                </label>
+                <button type="button" onClick={addQA}>ADD</button>
+                </div>
+            </form>
+            </div>
+---------------------------------------------------------------
