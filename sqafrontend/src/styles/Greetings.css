@@ -1,16 +1,16 @@
 *{
     box-sizing: border-box;
 }
-.Parent_container{
+.greeting{
     display: grid;
     
     border: 1px solid yellow;
 }
 
-article{
+.tutorial__bubble{
     border: 1px solid aqua;
 }
-.tutorial_bubbles{
+.tutorial{
     border: 1px solid red;
     
 }

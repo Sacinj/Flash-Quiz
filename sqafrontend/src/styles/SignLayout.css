@@ -28,6 +28,15 @@
     gap: 20px;
     padding-left: 20px;
 }
+.SigninPage h1{
+    font-family: 'Baloo Da 2', cursive;
+    background: linear-gradient(229.19deg, #FFCED0 16.84%, #DC97B1 71.48%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 4rem;
+}
 .SignupPage {
     width: 400px;
     height:500px;
@@ -71,8 +80,8 @@ img{
     object-position: left bottom;
 }
 .SigninPage h1, .SignupPage h1 {
-    font-size: 3.5rem;
-    color: #FFCACA;
+    font-size: 4rem;
+    
 }
 .SigninPage p{
     color: #FFFFFF;

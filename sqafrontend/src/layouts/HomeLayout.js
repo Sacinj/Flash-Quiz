@@ -6,6 +6,7 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import CardsetBar from "../Components/CardsetBar";
 import { collection } from "firebase/firestore";
 import { cardSetTitle } from "../Components/CardsetBar";
+import PersonIcon from "../Components/icons/person";
 
 const HomeLayout = () => {
     //const [userName, setUserName] = useState("");
@@ -51,42 +52,38 @@ const HomeLayout = () => {
     };
 
     return(
-        <div className="home_layout">
+        <div className="home-layout">
             
-            <nav className="nav_bar">
+            <nav className="nav-bar">
                     <h1>Flash Quiz</h1>
-                    <NavLink to="/homelayout/fcset">Create New Set</NavLink>
-                    <NavLink to="/homelayout/aboutus">About Us</NavLink>
-                    <NavLink to="/homelayout/quiz">Tutorial</NavLink>
-                    <article className="acct_nav">
-                        <button type="button" className="logout_btn" onClick={logout} >Log Out</button>
-                        <div>
-                            {/* {email} */}
+                    <div className="nav-bar__nav-link-container">
+                        <NavLink to="/homelayout/fcset" className="nav-bar__nav-link" activeClassName="active">Create New Set</NavLink>
+                        <NavLink to="/homelayout/aboutus" className="nav-bar__nav-link" activeClassName="active">About Us</NavLink>
+                        <NavLink to="/homelayout/quiz" className="nav-bar__nav-link" activeClassName="active">Tutorial</NavLink>
+                    </div>
+                    
+                    <article className="nav-bar__acct-nav">
+                        
+                        <div className="nav-bar__acct-nav__username">
                             {auth?.currentUser?.email}
-                            {/* {scienceList.map((qa)=>(
-                                if(qa.email==email){
-                                    <article className="set_box" key={qa.id}>
-                                    {qa.answer}
-                                    </article>
-                                } else{
-                                    <article className="set_box" key={qa.id}>
-                                    </article>
-                                }
-                                
-                            ))} */}
                         </div>
-                        <div className="profile_pic">
-                            <p>pic</p>
+
+                        <button type="button" className="nav-bar__acct-nav__logout-btn" onClick={logout} >Log Out</button>
+
+                        <div className="nav-bar__acct-nav__profile-pic">
+                            <PersonIcon />
                         </div>
                     </article>
             </nav>
-            {/* <CardsetBar userEmail={auth?.currentUser?.email}> */}
+            
+
             <CardsetBar>
             </CardsetBar>
             
-            <div className="home_content">
+            <div className="home-content">
                 <Outlet />
             </div>
+
         </div>
     );
 };

@@ -69,11 +69,11 @@ const CardsetBar = () => {
 
     // i cant display only qa becuase its an object and it's the id of the row, only its fields or properties
     return(
-        <section className="cardSet_bar">
+        <section className="card-set-bar">
                 
                 {
                     cardSetList?.map((set) => (
-                        <article className="set_box" key={set.id}>
+                        <article className="card-set-bar__set-box" key={set.id}>
                             <button type="button" onClick={()=>{editSet(set.id)}}><CardSetIcon /></button>
                             
                             {/* <NavLink to="/homelayout/quiz" onClick={()=>{getCardSetTitle(set.id)}}>{set.id}</NavLink> */}

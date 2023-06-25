@@ -25,7 +25,7 @@ const Signin=()=>{
 
     return(
         <div className="SigninPage">
-            <h1><span>Flash Quiz</span> App</h1>
+            <h1><div>Flash</div>Quiz App</h1>
             <p>Quiz App using Flash Cards</p>
 
             <form onSubmit={signin}>
