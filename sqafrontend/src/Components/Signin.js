@@ -2,6 +2,9 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { auth } from "../config/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import Cookies from "universal-cookie";
+
+const cookies = new Cookies();
 
 const Signin=()=>{
     const [pass, setPass] = useState('');
@@ -12,15 +15,22 @@ const Signin=()=>{
         console.log("Current user logged in: ",auth?.currentUser?.email);
     }, []);
 
-    const signin = (e) => {
+
+    const signin = async (e) => {
         e.preventDefault();
+        try{
         signInWithEmailAndPassword(auth, email, pass)
             .then((userCredentials) => {
                 console.log("User credentials: ",userCredentials);
+                cookies.set("auth-token", userCredentials.user.refreshToken);
                 navigate("/homelayout/quiz");
             }) .catch((err) => {
                 console.log(err);
             });
+            
+        } catch(err){
+            console.error(err);
+        }
     };
 
     return(

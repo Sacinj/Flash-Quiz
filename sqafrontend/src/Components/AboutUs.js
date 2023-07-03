@@ -1,3 +1,6 @@
+/* import Cookies from "universal-cookie";
+const cookies = Cookies(); */
+
 const AboutUs = () => {
     return(
         <section>

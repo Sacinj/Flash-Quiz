@@ -1,11 +1,16 @@
 import { useEffect, useState } from "react";
-import { setDoc, doc, deleteDoc, getDoc } from "firebase/firestore";
+import { setDoc, doc, deleteDoc, getDoc, collection, serverTimestamp, onSnapshot, query, where, orderBy } from "firebase/firestore";
 import { db } from "../config/firebase";
 import { auth } from "../config/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { useLocation, useNavigate } from "react-router-dom";
 import DeleteIcon from "./icons/delete";
 import AddCardIcon from "./icons/addCard";
+import "../styles/EditFCSet.css";
+
+//Problems:
+// If we refresh the whole page, then add a new Question and Answer then it will modify the the value 
+//    of the first question and answer since the value of nextNumber is 1
 
 
 const EditFCSet = () => {
@@ -16,50 +21,83 @@ const EditFCSet = () => {
     const [Email, setEmail] = useState(loggedInEmail);
     const [newQuestion, setNewQuestion] = useState("");
     const [newAnswer, setNewAnswer] = useState("");
+    const [nextNumber, setNextNumber] = useState(1);
     
-    useEffect(()=>{
+
+        useEffect(()=>{
         
-        onAuthStateChanged(auth, (userData)=>{
-            if(userData){
-                setEmail(userData.email);
-                console.log("EditFCSet: Current User is ", loggedInEmail);
-            }
-        });
-
-        getData();
-    },[loggedInEmail]);
-
-    const getData = async () => {
-        try {
-            const docSnap = await getDoc(doc(db, "USERS", loggedInEmail, "CARDSETS", title));
-            if(docSnap.exists()){
-                setCardSet(docSnap.data());
-                console.log("EditFCSet: Data: ", cardSet);
-            } else{
-                console.log("EditFCSet no data");
-            }
-        } catch (err) {
-            console.error(err);
-        }
-    }
-
-    /* useEffect(()=>{
-        getData();
-    },[]) */
-
-    const addQA = async () => {
-        /* try {
-            await setDoc(scienceCollectionRef,{
-                answer: newAnswer,
-                question: newQuestion,
+            const unsubscribe = onAuthStateChanged(auth, (userData)=>{
+                if(userData){
+                    setEmail(userData.email);
+                    console.log("EditFCSet: Current User is ", loggedInEmail);
+                    getData();
+                }
             });
-            console.log("added");
-            console.log(newQuestion);
-            console.log(newAnswer);
+    
+            //getData();
+            return () => {
+                unsubscribe();
+            }
+        },[loggedInEmail, title, nextNumber]);
+    
+        const getData = async () => {
+            try {
+                const docSnap = await getDoc(doc(db, "USERS", Email, "CARDSETS", title));
+                if(docSnap.exists()){
+                    setCardSet(docSnap.data());
+                    console.log("EditFCSet: Data: ", cardSet);
+
+                    const fieldNames = Object.keys(cardSet);
+                    console.log(fieldNames);
+                    // Extract the numbers from field names
+                    const numbers = fieldNames.map((fieldName) => parseInt(fieldName.slice(1)));
+                    // Sort the numbers in descending order
+                    numbers.sort((a, b) => b - a);
+                    // Get the highest number
+                    const highestNumber = numbers[0];
+                    console.log("This is the highest numebr: ", highestNumber);
+                    if(highestNumber){
+                        setNextNumber(highestNumber+1);
+                        console.log(nextNumber);
+                    }
+                    
+
+
+                } else{
+                    console.log("EditFCSet no data");
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+
+
+
+    const addQA = async (e) => {
+        e.preventDefault();
+        console.log("The next number: ", nextNumber);
+        let qNumber = 'q'+nextNumber;
+        let aNumber = 'a'+nextNumber;
+        try {
+            await setDoc(doc(db, "USERS", Email, "CARDSETS", title), {
+                // ...doc.data,
+                [qNumber]: newQuestion,
+                [aNumber]: newAnswer,
+
+            }, {merge: true});
+
+            setNextNumber(nextNumber+1);
+            setNewAnswer("");
+            setNewQuestion("");
         } catch (err) {
             console.error(err);
-        } */
+        } 
     };
+
+
+
+
     const deleteSet = async () => {
         try{
             await deleteDoc(doc(db,"USERS", loggedInEmail, "CARDSETS",title ));
@@ -77,47 +115,53 @@ const EditFCSet = () => {
                 <button type="button" onClick={deleteSet}><span><DeleteIcon/></span>Delete Set</button>
             </div>
             
+
+
             <div className="add2set_container">
-            <form className="add2set_form">
+            <form onSubmit={addQA} className="add2set_form">
                 <div>
                 <label>
                     Question:
-                    <input placeholder="Question..." onChange={(e) => {setNewQuestion(e.target.value)}}></input>
+                    <input placeholder="Question..." onChange={(e) => {setNewQuestion(e.target.value)}} value={newQuestion}></input>
                 </label>
                 <label>
                     Answer:
-                    <input placeholder="Answer..." onChange={(e) => {setNewAnswer(e.target.value)}}></input>
+                    <input placeholder="Answer..." onChange={(e) => {setNewAnswer(e.target.value)}} value={newAnswer}></input>
                 </label>
                 </div>
 
                 <div className="addButton">
-                <button type="button" onClick={addQA}><span><AddCardIcon/></span>ADD</button>
+                <button type="submit" ><span><AddCardIcon/></span>ADD</button>
                 </div>
             </form>
             </div>
 
+
+
             <h2>Cards</h2>
-            <div>
-                <div>
-                    <p>Questions:</p>
-                    <p>Answers:</p>
-                </div>
-                <div>
+            <div className="table-container">
+                <table className="table-container__table">
+                    <tr className="table__heading">
+                        <th>Questions</th>
+                        <th>Answers</th>
+                        <th></th>
+                    </tr>
+                    <tr>
                     {
-                        /* cardSet?.map((field)=>(
-                            <article>
-                                <p>{field}</p>
-                            </article>
-                        )) */
-
-
-                            /* What to do here is to display the fields of this document and then get the 
-                            number of the last question in order to know the next field name/number of
-                            the new question and answer to be added by incrementing */
+                        
+                        Object.keys(cardSet).map((key) => (
+                            <td key={key}>
+                              <p>{key}: {cardSet[key]}</p>
+                            </td>
+                          ))
 
                     }
-                </div>
+                    </tr>
+                    
+                    
+                </table>
             </div>
+
         </section>
     );
 };
