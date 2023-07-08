@@ -5,12 +5,14 @@ import { auth } from "../config/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import "../styles/FCSet.css";
 import CreateSetIcon from "./icons/createSet";
+import { useNavigate } from "react-router-dom";
 
 const FCSet = () => {
     const [newQuestion, setNewQuestion] = useState("");
     const [newAnswer, setNewAnswer] = useState("");
     const [newSetName, setNewSetName] = useState("");
     const [email, setEmail] = useState("");
+    const navigate = useNavigate();
 
     const loggedInEmail = auth?.currentUser?.email;
 
@@ -30,7 +32,9 @@ const FCSet = () => {
                 a1: newAnswer,
                 q1: newQuestion,
             });
+            navigate(`/homelayout/editFC/${newSetName}`);
             window.location.reload(true); // to refresh the card set bar to show the new card set on the list
+            
         } catch (err) {
             console.error(err);
         }
@@ -38,13 +42,13 @@ const FCSet = () => {
     };
     
 
-    
 
     return(
         <section>
             <h1>Create New Set</h1>
             <div>
-                <p>Note: Name must not repeat any other card set name</p>
+                <p>Note: Flash Card Set Name must not repeat any other card set name</p>
+                <p>Note: Flash Card Set Name must not have spaces</p>
             </div>
 
             <div className="new_set_container">

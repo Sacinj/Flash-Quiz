@@ -1,7 +1,19 @@
 .table-container{
     background-color: #372948;
+    color: azure;
 }
 .table-container__table{
     border: 20px;
 
+}
+
+tr{
+    border: 1px solid white;
+}
+
+td{
+    border: 1px solid white;
+}
+.editFCSet_button{
+    background: transparent;
 }
