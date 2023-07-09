@@ -24,6 +24,7 @@ const FCSet = () => {
                 console.log("FCSet: Current User is ", loggedInEmail);
             }
         });
+        console.log("FCSet: useEffect has run");
     },[loggedInEmail]);
 
     const addNewSet = async () => {

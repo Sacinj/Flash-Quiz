@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { NavLink, Outlet, Link, useNavigate } from "react-router-dom";
 import '../styles/HomeLayout.css';
-import { auth } from "../config/firebase";
+import { auth, db } from "../config/firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import CardsetBar from "../Components/CardsetBar";
-import { collection } from "firebase/firestore";
+import { doc, collection, getDoc } from "firebase/firestore";
 import { cardSetTitle } from "../Components/CardsetBar";
 import PersonIcon from "../Components/icons/person";
 
@@ -12,6 +12,7 @@ const HomeLayout = () => {
     //const [userName, setUserName] = useState("");
     const [email, setEmail] = useState("");
     const loggedInEmail = auth?.currentUser?.email; //Needs checking to see if this variable is the best
+    const [username, setUserName] = useState("");
 
     /* const getUserName = async ( email ) => {
         try{
@@ -28,6 +29,16 @@ const HomeLayout = () => {
         
     } */
     
+    const getUsername = async () => {
+        try {
+            const docSnapName = await getDoc(doc(db, "USERS", loggedInEmail));
+            if(docSnapName.exists()){
+                setUserName(docSnapName.data().username);
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    };
 
     useEffect(()=>{
         
@@ -35,9 +46,11 @@ const HomeLayout = () => {
             //console.log(userData);
             if(userData){
                 setEmail(userData.email);
+                getUsername();
             }
         });
         //getUserName();
+        console.log("HomeLayout: useEffect has run");
     },[loggedInEmail]);
     const navigate = useNavigate();
 
@@ -65,7 +78,8 @@ const HomeLayout = () => {
                     <article className="nav-bar__acct-nav">
                         
                         <div className="nav-bar__acct-nav__username">
-                            {auth?.currentUser?.email}
+                            {/* {auth?.currentUser?.email} */}
+                            {username}
                         </div>
 
                         <button type="button" className="nav-bar__acct-nav__logout-btn" onClick={logout} >Log Out</button>
