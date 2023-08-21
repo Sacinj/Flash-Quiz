@@ -90,7 +90,9 @@ const Quiz = () => {
         setIsShuffle(!isShuffle);
     };
 
-    const flipCard = () => {
+
+    //This also works - problems still persists
+    /* const flipCard = () => {
         toggleQA ? setToggleQA(false) : setToggleQA(true);
         if(toggleQA){
             setFieldName('q'+numberQA);
@@ -99,6 +101,21 @@ const Quiz = () => {
         }
         //console.log("ToggleQA= ",toggleQA);
         //console.log("Fieldname = ", fieldname);
+    }; */
+
+    //This works - problem still persists
+    const flipCard = () => {
+        toggleQA ? setToggleQA(false) : setToggleQA(true);
+        if(toggleQA){
+            setFieldName(currentField => {
+                return 'q'+ parseInt(currentField.slice(1));
+            });
+        } else{
+            setFieldName(currentField => {
+                return 'a'+ parseInt(currentField.slice(1));
+            });
+        }
+        
     };
     
     const nextCard = () => {
