@@ -1,5 +1,6 @@
 import {createBrowserRouter, createRoutesFromElements, Route, RouterProvider} from 'react-router-dom';
 import './App.css';
+import Cookies from 'universal-cookie';
 
 //pages
 import Signin from './Components/Signin';
@@ -16,7 +17,7 @@ import RootLayout from './layouts/RootLayout';
 import SignLayout from './layouts/SignLayout';
 import HomeLayout from './layouts/HomeLayout';
 
-
+const cookies = new Cookies();
 
 const router = createBrowserRouter(
   createRoutesFromElements(

@@ -420,3 +420,155 @@ const addQA = async () => {
             </form>
             </div>
 ---------------------------------------------------------------
+---------------EditFCSet----------------------------
+const addQA = async () => {
+        /* try {
+            await setDoc(scienceCollectionRef,{
+                answer: newAnswer,
+                question: newQuestion,
+            });
+            console.log("added");
+            console.log(newQuestion);
+            console.log(newAnswer);
+        } catch (err) {
+            console.error(err);
+        } */
+    };
+
+
+<div>
+                    <p>Questions:</p>
+                    <p>Answers:</p>
+                </div>
+                <div>
+                    {
+                        /* cardSet?.map((field)=>(
+                            <article>
+                                <p>{field}</p>
+                            </article>
+                        )) */
+
+
+                            /* What to do here is to display the fields of this document and then get the 
+                            number of the last question in order to know the next field name/number of
+                            the new question and answer to be added by incrementing */
+
+                    }
+                </div>
+---------------------------------------------------------------------
+--------------------------Signin before using cookies-------------------
+useEffect(() => {
+        console.log("Current user logged in: ",auth?.currentUser?.email);
+    }, []);
+
+    const signin = (e) => {
+        e.preventDefault();
+        signInWithEmailAndPassword(auth, email, pass)
+            .then((userCredentials) => {
+                console.log("User credentials: ",userCredentials);
+                navigate("/homelayout/quiz");
+            }) .catch((err) => {
+                console.log(err);
+            });
+    };
+--------------------------------------------------------------------
+-----------------------EditFCSet comments/drafts after being able to add and display properly----------
+// const setTitleRef = doc(db, "USERS", loggedInEmail, "CARDSETS", title);
+    /* const userCookie = cookies.get("auth-token");
+        console.log("User Cookie Email: ",userCookie.email); */
+
+                /* const getData = async () => {
+            try{
+                const queryData = query(doc(db, "USERS", loggedInEmail, "CARDSETS", title));
+                const ususcribe = onSnapshot(queryData, (snapshot) => {
+                    let qaData = [];
+                    snapshot.forEach((field) => {
+                        qaData.push({...field.data()});
+                    });
+                    setCardSet(qaData);
+                    console.log("The CardSet Data from query: ", qaData);
+                });
+            } catch (err) {
+                console.error(err);
+            }
+        } */
+    
+    /* useEffect(()=>{
+        
+        onAuthStateChanged(auth, (userData)=>{
+            if(userData){
+                setEmail(userData.email);
+                console.log("EditFCSet: Current User is ", loggedInEmail);
+                getData();
+            }
+        });
+        
+
+        if(loggedInEmail){
+            getData();
+        }
+        
+    },[loggedInEmail]);
+
+    const getData = async () => {
+        try {
+            const docSnap = await getDoc(doc(db, "USERS", loggedInEmail, "CARDSETS", title));
+            if(docSnap.exists()){
+                setCardSet(docSnap.data());
+                console.log("EditFCSet: Data: ", cardSet);
+
+                const fieldNames = Object.keys(cardSet);
+                console.log(fieldNames);
+                // Extract the numbers from field names
+                const numbers = fieldNames.map((fieldName) => parseInt(fieldName.slice(1)));
+                // Sort the numbers in descending order
+                numbers.sort((a, b) => b - a);
+                // Get the highest number
+                const highestNumber = numbers[0];
+                console.log("This is the highest numebr: ", highestNumber);
+                setNextNumber(highestNumber+1);
+                console.log(nextNumber);
+
+            } else{
+                console.log("EditFCSet no data");
+            }
+        } catch (err) {
+            console.error(err);
+        }
+    } */
+
+
+
+        /* const addQA = () => {
+        console.log("The next number: ", nextNumber);
+    }; */
+
+
+    /* const addNewSet = async () => {
+        try {
+            await setDoc(doc(db, "USERS",loggedInEmail, "CARDSETS", newSetName),{
+                a1: newAnswer,
+                q1: newQuestion,
+            });
+            window.location.reload(true); // to refresh the card set bar to show the new card set on the list
+        } catch (err) {
+            console.error(err);
+        }
+        
+    }; */
+
+
+    // cardSet ? <p>{cardSet["q1"]}</p> : <p>Loading...</p>
+                        /* cardSet ? for(const i=0; i<nextNumber; i++){
+
+                        } : <p>Loading...</p> */
+
+
+
+                        Object.keys(cardSet).map((key) => (
+                            <td key={key}>
+                              <p>{key}: {cardSet[key]}</p>
+                            </td>
+                          ))
+
+-----------------------------------------------------------------------------------------------------

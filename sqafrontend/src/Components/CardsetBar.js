@@ -42,24 +42,25 @@ const CardsetBar = () => {
                 //console.log("THY EMAIL: ",userData.email);
                 setUserEmail(userData.email);
                 //console.log("The userEmail: ",userEmail);
-            } else{
+            } /* else{
                 console.log("CardsetBar: Walay sulod ky wlay email");
-            }
+            } */
         });
         //console.log("Current user(useEffect upper, CardsetBar): ", userEmail);
         if(userEmail){
             getCardSets();
-            console.log("CardsetBar: Na get ang cardset");
-        }else{
+            // console.log("CardsetBar: Na get ang cardset");
+        }/* else{
             console.log("CardsetBar: Wala na get ang card set");
-        }
+        } */
         //console.log("Current user(useEffect lower, CardsetBar): ", userEmail);
+        console.log("CardsetBar: useEffect has run");
     }, [loggedInEmail]);
 
     const getCardSetTitle = (title) => {
         
              cardSetTitle = title;
-            console.log("CardsetBar: The title: ", cardSetTitle);
+            // console.log("CardsetBar: The title: ", cardSetTitle);
         
     };
 
