@@ -11,6 +11,7 @@ import Welcome from './Components/Welcome';
 import Greeting from './Components/Greeting';
 import AboutUs from './Components/AboutUs';
 import EditFCSet from './Components/EditFCSet';
+import AccountSettings from './Components/AccountSettings';
 
 //layouts
 import RootLayout from './layouts/RootLayout';
@@ -33,6 +34,7 @@ const router = createBrowserRouter(
         <Route path="fcset" element={<FCSet/>}></Route>
         <Route path="aboutus" element={<AboutUs/>}></Route>
         <Route path="editFC/:children" element={<EditFCSet/>}></Route>
+        <Route path="accountSettings" element={<AccountSettings/>}></Route>
       </Route>
       
     </Route>

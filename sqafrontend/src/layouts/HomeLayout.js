@@ -84,9 +84,11 @@ const HomeLayout = () => {
 
                         <button type="button" className="nav-bar__acct-nav__logout-btn" onClick={logout} >Log Out</button>
 
-                        <div className="nav-bar__acct-nav__profile-pic">
-                            <PersonIcon />
-                        </div>
+                        <NavLink to="/homelayout/accountSettings"  >
+                            <div className="nav-bar__acct-nav__profile-pic">
+                                <span><PersonIcon /></span>
+                            </div>
+                        </NavLink>
                     </article>
             </nav>
             
