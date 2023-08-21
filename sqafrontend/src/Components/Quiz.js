@@ -7,6 +7,13 @@ import { onAuthStateChanged } from "firebase/auth";
 
 //Problems:
 // Need to double click the flip button the first time the current QA is displayed
+   /* This problem was solved by checking which of the toggle statements of the flipCard function was run
+      Seeing that previously the default value of the toggleQA was true ang on the first render the question
+      is the first one displayed, when the flip button is pressed it is already displaying the question so
+      nothing would change in the display. But by changing the default to false it was solved. Note: Need further analyzation cuz im not sure why its working
+      Furthermore, idk if it was after adding the key on the <p> tag that the problem of when clicking next or back 
+      the flip would also need to be clicked twice but by updating toggleQA back to false it was solved.  
+   */
 
 //Note:
 // Does not display anything when the fieldname where the number does not exits. But it's ok since its not an error
@@ -18,7 +25,7 @@ const Quiz = () => {
     const [userEmail, setUserEmail] = useState(currentUser);
     
     const [fieldname, setFieldName] = useState('q1');
-    const [toggleQA, setToggleQA] = useState(true);
+    const [toggleQA, setToggleQA] = useState(false);
     const [numberQA, setNumberQA] = useState(1);
     const [cardSetLength, setCardSetLength] = useState(1);
     const [isShuffle, setIsShuffle] = useState(false);
@@ -83,7 +90,7 @@ const Quiz = () => {
         return() => {
             authClear();
         }
-    },[currentUser]);// there is no difference if we include fieldname and numberQA, idk why
+    },[currentUser, fieldname]);// there is no difference if we include fieldname and numberQA, idk why
 //, fieldname, numberQA - myabe included in the dependencies of useEffect
     
     const shuffleSet = () => {
@@ -110,10 +117,12 @@ const Quiz = () => {
             setFieldName(currentField => {
                 return 'q'+ parseInt(currentField.slice(1));
             });
+            // console.log("Flip b clicked");
         } else{
             setFieldName(currentField => {
                 return 'a'+ parseInt(currentField.slice(1));
             });
+            // console.log("Flip a clicked");
         }
         
     };
@@ -122,11 +131,14 @@ const Quiz = () => {
         if(numberQA<cardSetLength && isShuffle===false){
             setNumberQA(numberQA+1);
             setFieldName('q'+(numberQA+1));
+            setToggleQA(false);
+            // console.log("next clicked");
         } else if(isShuffle===true){
             let randoNum = Math.floor(Math.random() * ((cardSetLength - 1 + 1)) + 1);
             
             setNumberQA(randoNum);
             setFieldName('q'+randoNum);
+            setToggleQA(false);
         }
         
     };
@@ -135,11 +147,14 @@ const Quiz = () => {
         if(numberQA>1 && isShuffle===false){
             setNumberQA(numberQA-1);
             setFieldName('q'+(numberQA-1));
+            setToggleQA(false);
+            // console.log("back clicked");
         } else if(isShuffle===true){
             let randoNum = Math.floor(Math.random() * ((cardSetLength - 1 + 1)) + 1);
             
             setNumberQA(randoNum);
             setFieldName('q'+randoNum);
+            setToggleQA(false);
         }
 
     };
@@ -168,7 +183,7 @@ const Quiz = () => {
                 {
                     //cardSet[fieldname] && <p>Loading...</p> // mo render na wla pay sulod ang cardSet guro mao error
                     //cardSet?.fieldname || <p>Loading...</p>
-                    cardSet ? <p>{cardSet[fieldname]}</p> : <p>Loading...</p>
+                    cardSet ? <p key={fieldname}>{cardSet[fieldname]}</p> : <p>Loading...</p>
                 }
                 
                 
